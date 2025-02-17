@@ -1,4 +1,15 @@
 services:
+# service php đang sử dụng image php:8.1-apache (đây là image chính thức của PHP có tích hợp sẵn Apache). 
+# Vì vậy, web server được dùng để chạy ứng dụng trong compose này chính là Apache.
+  php:
+    image: php:8.1-apache
+    container_name: php_server
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - elasticsearch
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
     container_name: elasticsearch
